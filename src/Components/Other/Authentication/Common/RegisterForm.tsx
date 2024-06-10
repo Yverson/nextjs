@@ -30,6 +30,7 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import generator from "generate-password";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 export const EdgeDataList = ["Marié", "Célibataire", "En Concubinage"];
 export const GenreDataList = ["Femme", "Homme"];
@@ -55,6 +56,7 @@ export interface ClientSubmitProp {
 export const RegisterForm: React.FC<SignupProp> = ({ logoClass }) => {
   const [show, setShow] = useState(false);
   const [selectedOptions, setSelectedOptions] = useState({});
+  const router = useRouter();
 
   const formik = useFormik({
     initialValues: {
@@ -141,9 +143,10 @@ export const RegisterForm: React.FC<SignupProp> = ({ logoClass }) => {
       );
       const { jwt, user } = response.data;
 
-      setShow(false);
+      router.push("/others/authentication/registerwizard?id=" + user.id.toString());
       formik.resetForm();
       generateCredentials();
+      setShow(false);
 
       return { isSuccessed: true, user, token: jwt };
     } catch (error) {
