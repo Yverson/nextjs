@@ -143,7 +143,7 @@ export const RegisterForm: React.FC<SignupProp> = ({ logoClass }) => {
       );
       const { jwt, user } = response.data;
 
-      router.push("/others/authentication/registerwizard?id=" + user.id.toString());
+      router.push("/fr/others/authentication/registerwizard?id=" + user.id.toString());
       formik.resetForm();
       generateCredentials();
       setShow(false);
