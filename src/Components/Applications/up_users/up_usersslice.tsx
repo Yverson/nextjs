@@ -42,7 +42,7 @@ export const fetchData = async (
   try {
     if (searcParam.text.length > 0 && searcParam.type == "Search") {
       const response = await axios.get(
-        `${process.env.NEXT_PUBLIC_STRAPI_URL}/users?populate=*&sort=id:desc&pagination[page]=${page}&pagination[pageSize]=${pageSize}&filters[EstSupprimer][$eq]=false&filters[$or][0][username][$contains]=${searcParam.text}&filters[$or][1][email][$contains]=${searcParam.text}`,
+        `${process.env.NEXT_PUBLIC_STRAPI_URL}/users?populate=*&sort=id:desc&pagination[page]=${page}&pagination[pageSize]=${pageSize}&filters[EstSupprimer][$eq]=false&filters[Type][$eq]=Client&filters[$or][0][username][$contains]=${searcParam.text}&filters[$or][1][email][$contains]=${searcParam.text}`,
         {
           headers: {
             "Content-Type": "application/json",
@@ -62,7 +62,7 @@ export const fetchData = async (
       return { data: convertedAvis, pagination: {} };
     } else {
       const response = await axios.get(
-        `${process.env.NEXT_PUBLIC_STRAPI_URL}/users?populate=*&sort=id:desc&pagination[page]=${page}&pagination[pageSize]=${pageSize}&filters[EstSupprimer][$eq]=false`,
+        `${process.env.NEXT_PUBLIC_STRAPI_URL}/users?populate=*&sort=id:desc&pagination[page]=${page}&pagination[pageSize]=${pageSize}&filters[EstSupprimer][$eq]=false&filters[Type][$eq]=Client`,
         {
           headers: {
             "Content-Type": "application/json",
