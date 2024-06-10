@@ -143,6 +143,7 @@ export const RegisterForm: React.FC<SignupProp> = ({ logoClass }) => {
 
       setShow(false);
       formik.resetForm();
+      generateCredentials();
 
       return { isSuccessed: true, user, token: jwt };
     } catch (error) {
