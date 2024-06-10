@@ -76,10 +76,10 @@ const Deleteclients = () => {
                   <input
                     className={`form-control ${
                       clientsValidation &&
-                      `${errors.Noms ? "is-invalid" : "is-valid"}`
+                      `${errors.Nom ? "is-invalid" : "is-valid"}`
                     }`}
                     type="text"
-                    {...register("Noms", { required: true })}
+                    {...register("Nom", { required: true })}
                     placeholder="Noms"
                   />
                 </FormGroup>
@@ -97,91 +97,7 @@ const Deleteclients = () => {
                     placeholder="Tel"
                   />
                 </FormGroup>
-              </Col>
-              <Col md={6}>
-                <FormGroup>
-                  <Label check>Fax</Label>
-                  <input
-                    className={`form-control ${
-                      clientsValidation &&
-                      `${errors.Fax ? "is-invalid" : "is-valid"}`
-                    }`}
-                    type="text"
-                    {...register("Fax", { required: true })}
-                    placeholder="Fax"
-                  />
-                </FormGroup>
-              </Col>
-              <Col md={6}>
-                <FormGroup>
-                  <Label check>Addresse</Label>
-                  <input
-                    className={`form-control ${
-                      clientsValidation &&
-                      `${errors.Addresse ? "is-invalid" : "is-valid"}`
-                    }`}
-                    type="text"
-                    {...register("Addresse", { required: true })}
-                    placeholder="Addresse"
-                  />
-                </FormGroup>
-              </Col>
-              <Col md={6}>
-                <FormGroup>
-                  <Label check>Rc</Label>
-                  <input
-                    className={`form-control ${
-                      clientsValidation &&
-                      `${errors.Rc ? "is-invalid" : "is-valid"}`
-                    }`}
-                    type="text"
-                    {...register("Rc", { required: true })}
-                    placeholder="Rc"
-                  />
-                </FormGroup>
-              </Col>
-              <Col md={6}>
-                <FormGroup>
-                  <Label check>CC</Label>
-                  <input
-                    className={`form-control ${
-                      clientsValidation &&
-                      `${errors.CC ? "is-invalid" : "is-valid"}`
-                    }`}
-                    type="text"
-                    {...register("CC", { required: true })}
-                    placeholder="CC"
-                  />
-                </FormGroup>
-              </Col>
-              <Col md={6}>
-                <FormGroup>
-                  <Label check>PersonContacte</Label>
-                  <input
-                    className={`form-control ${
-                      clientsValidation &&
-                      `${errors.PersonContacte ? "is-invalid" : "is-valid"}`
-                    }`}
-                    type="text"
-                    {...register("PersonContacte", { required: true })}
-                    placeholder="PersonContacte"
-                  />
-                </FormGroup>
-              </Col>
-              <Col md={6}>
-                <FormGroup>
-                  <Label check>NumPersonContact</Label>
-                  <input
-                    className={`form-control ${
-                      clientsValidation &&
-                      `${errors.NumPersonContact ? "is-invalid" : "is-valid"}`
-                    }`}
-                    type="text"
-                    {...register("NumPersonContact", { required: true })}
-                    placeholder="NumPersonContact"
-                  />
-                </FormGroup>
-              </Col>
+              </Col>             
             </Row>
             <Button
               color="secondary"
