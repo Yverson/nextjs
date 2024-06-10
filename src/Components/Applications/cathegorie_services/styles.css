@@ -1,0 +1,16 @@
+/* styles.css */
+.purple-pagination .page-link {
+    background-color: white; /* Bootstrap 5 purple */
+    color: #5f3e9b;
+    border-color: #5f3e9b;
+}
+
+.purple-pagination .page-link:hover {
+    background-color: #b5a2d3;
+    border-color: #b5a2d3;
+}
+
+.purple-pagination .active .page-link {
+    background-color: #b5a2d3; /* A darker shade of purple */
+    border-color: #b5a2d3;
+}
