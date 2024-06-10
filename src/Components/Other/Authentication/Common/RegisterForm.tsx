@@ -81,7 +81,24 @@ export const RegisterForm: React.FC<SignupProp> = ({ logoClass }) => {
       await login(JSON.stringify(formik.values, null, 2));
     },
     onReset(values, formikHelpers) {
-      formik.resetForm();
+      formik.values = ({
+        Nom: "",
+        DateNaissance: new Date(),
+        email: "",
+        Genre: "Femme",
+        Situationmatrimoniale: "Marié",
+        IsEmail: false,
+        Tel: "",
+        Tel2: "",
+        Profession: "",
+        Pays: "",
+        Ville: "",
+        CommentFIV: "",
+        tentativeFIV: "",
+        consultationVIP: "",
+        username: "",
+        password: "",
+      });
     },
   });
 
@@ -124,7 +141,6 @@ export const RegisterForm: React.FC<SignupProp> = ({ logoClass }) => {
       );
       const { jwt, user } = response.data;
 
-      alert("login successful");
       setShow(false);
       formik.resetForm();
 
