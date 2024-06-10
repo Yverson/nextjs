@@ -23,7 +23,7 @@ import {
   useFormik,
 } from "formik";
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button, Col, FormGroup, Input, Label, Row } from "reactstrap";
 import { OtherWay } from "./OtherWay";
 import axios from "axios";
@@ -84,6 +84,10 @@ export const RegisterForm: React.FC<SignupProp> = ({ logoClass }) => {
       formik.resetForm();
     },
   });
+
+  useEffect(() => {
+    generateCredentials();
+  }, []);
 
   const generateCredentials = () => {
     const username = generator.generate({
