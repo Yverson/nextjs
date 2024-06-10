@@ -18,18 +18,28 @@ const initialState: clientsSliceType = {
 const convert = (data: any): clientsType => {
   return {
     id: data.id,
-    createdAt: data.attributes?.createdAt
-      ? new Date(data.attributes?.createdAt).toISOString().substring(0, 19)
+    createdAt: data?.createdAt
+      ? new Date(data?.createdAt).toISOString().substring(0, 19)
       : "",
-    Noms: data.attributes?.Noms ?? null,
-    Tel: data.attributes?.Tel ?? null,
-    Fax: data.attributes?.Fax ?? null,
-    Addresse: data.attributes?.Addresse ?? null,
-    Rc: data.attributes?.Rc ?? null,
-    CC: data.attributes?.CC ?? null,
-    PersonContacte: data.attributes?.PersonContacte ?? null,
-    NumPersonContact: data.attributes?.NumPersonContact ?? null,
-    EstSupprimer: data.attributes?.EstSupprimer ?? null,
+      DateNaissance: data?.DateNaissance
+        ? new Date(data?.DateNaissance).toISOString().substring(0, 19)
+        : "",
+        username: data?.username ?? null,
+        Nom: data?.Nom ?? null,
+        email: data?.email ?? null,
+    Tel: data?.Tel ?? null,
+    Genre: data?.Genre ?? null,
+    Situationmatrimoniale: data?.Situationmatrimoniale ?? null,
+    IsEmail: data?.IsEmail ?? null,
+    Profession: data?.Profession ?? null,
+    Tel2: data?.Tel2 ?? null,
+    Pays: data?.Pays ?? null,
+    Ville: data?.Ville ?? null,
+    CommentFIV: data?.CommentFIV ?? null,
+    Type: data?.Type ?? null,
+    consultationVIP: data?.consultationVIP ?? null,
+    tentativeFIV: data?.tentativeFIV ?? null,
+    EstSupprimer: data?.EstSupprimer ?? null,
   };
 };
 
@@ -41,7 +51,7 @@ export const fetchData = async (
   try {
     if (searcParam.text.length > 0 && searcParam.type == "Search") {
       const response = await axios.get(
-        `${process.env.NEXT_PUBLIC_STRAPI_URL}/clients?populate=*&sort=id:desc&pagination[page]=${page}&pagination[pageSize]=${pageSize}&filters[EstSupprimer][$eq]=false&filters[$or][0][Noms][$contains]=${searcParam.text}&filters[$or][1][Tel][$contains]=${searcParam.text}&filters[$or][2][Fax][$contains]=${searcParam.text}&filters[$or][3][Addresse][$contains]=${searcParam.text}&filters[$or][4][Rc][$contains]=${searcParam.text}&filters[$or][5][CC][$contains]=${searcParam.text}&filters[$or][6][PersonContacte][$contains]=${searcParam.text}&filters[$or][7][NumPersonContact][$contains]=${searcParam.text}`,
+        `${process.env.NEXT_PUBLIC_STRAPI_URL}/users?populate=*&sort=id:desc&pagination[page]=${page}&pagination[pageSize]=${pageSize}&filters[EstSupprimer][$eq]=false&filters[Type][$eq]=Client&filters[$or][0][username][$contains]=${searcParam.text}&filters[$or][1][email][$contains]=${searcParam.text}`,
         {
           headers: {
             "Content-Type": "application/json",
@@ -51,7 +61,7 @@ export const fetchData = async (
         }
       );
 
-      const items = response.data ? response.data.data : [];
+      const items = response ? response.data : [];
       const meta = response.data.meta.pagination ?? {};
       const convertedAvis: clientsType[] = items.map((data: any) =>
         convert(data)
@@ -61,7 +71,7 @@ export const fetchData = async (
       return { data: convertedAvis, pagination: meta };
     } else {
       const response = await axios.get(
-        `${process.env.NEXT_PUBLIC_STRAPI_URL}/clients?populate=*&sort=id:desc&pagination[page]=${page}&pagination[pageSize]=${pageSize}&filters[EstSupprimer][$eq]=false`,
+        `${process.env.NEXT_PUBLIC_STRAPI_URL}/users?populate=*&sort=id:desc&pagination[page]=${page}&pagination[pageSize]=${pageSize}&filters[EstSupprimer][$eq]=false&filters[Type][$eq]=Client`,
         {
           headers: {
             "Content-Type": "application/json",
@@ -71,14 +81,13 @@ export const fetchData = async (
         }
       );
 
-      const items = response.data ? response.data.data : [];
-      const meta = response.data.meta.pagination ?? {};
+      const items = response.data ? response.data : [];
+      //const meta = response.data.meta.pagination ?? {};
       const convertedAvis: clientsType[] = items.map((data: any) =>
         convert(data)
       );
 
-      clientsdata = convertedAvis;
-      return { data: convertedAvis, pagination: meta };
+      return { data: convertedAvis, pagination: {} };
     }
   } catch (error) {
     console.error("Erreur lors de la récupération des commandes:", error);
@@ -92,8 +101,8 @@ export const createclients = createAsyncThunk(
     try {
       data.EstSupprimer = false;
       const response = await axios.post(
-        `${process.env.NEXT_PUBLIC_STRAPI_URL}/clients`,
-        { data }
+        `${process.env.NEXT_PUBLIC_STRAPI_URL}/users`,
+        data
       );
 
       return response.data;
@@ -112,8 +121,8 @@ export const editclients = createAsyncThunk(
     try {
       //data.Etat = "ACTIF";
       const response = await axios.put(
-        `${process.env.NEXT_PUBLIC_STRAPI_URL}/clients/${data.id}`,
-        { data }
+        `${process.env.NEXT_PUBLIC_STRAPI_URL}/users/${data.id}`,
+        data
       );
 
       return response.data;
@@ -132,8 +141,8 @@ export const deleteclients = createAsyncThunk(
     try {
       data.EstSupprimer = true;
       const response = await axios.put(
-        `${process.env.NEXT_PUBLIC_STRAPI_URL}/clients/${data.id}`,
-        { data }
+        `${process.env.NEXT_PUBLIC_STRAPI_URL}/users/${data.id}`,
+        data
       );
 
       return response.data;

@@ -1,16 +1,24 @@
 export interface clientsType {
-    id?: number;
-    createdAt?: string;
-      Noms?: string;
-  Tel?: string;
-  Fax?: string;
-  Addresse?: string;
-  Rc?: string;
-  CC?: string;
-  PersonContacte?: string;
-  NumPersonContact?: string;
-  EstSupprimer?: boolean;
 
+  id?: number;
+  username?: string;
+  email?: string;
+  createdAt?: string;
+  Nom?: string;
+  DateNaissance?: string;
+  Genre?: string;
+  Situationmatrimoniale?: string;
+  IsEmail?: boolean;
+  Tel?: string;
+  Tel2?: string;
+  Profession?: string;
+  Pays?: string;
+  Ville?: string;
+  CommentFIV?: string;
+  Type?: string;
+  consultationVIP?: string;
+  tentativeFIV?: string;
+  EstSupprimer?: boolean;
 }
 
 export interface clientsSliceType {

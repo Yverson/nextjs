@@ -1,5 +1,3 @@
-import { dossiersType } from "@/Components/Applications/dossiers/dossiers";
-import { operationsType } from "@/Components/Applications/operations/operations";
 import axios from "axios";
 import { ApolloClient, InMemoryCache, gql } from "@apollo/client";
 
@@ -372,7 +370,7 @@ export const fetchData = async () => {
 };
 
 
-const convertOperation = (data: any): operationsType => {
+const convertOperation = (data: any): any => {
   return {
     id: data.id,
     createdAt: data.attributes?.createdAt

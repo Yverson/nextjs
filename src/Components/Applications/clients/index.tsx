@@ -20,7 +20,6 @@ import "./styles.css";
 import { useDispatch } from "react-redux";
 import { fetchData, setSearcParam, setrefresh } from "./clientsslice";
 import { useAppSelector } from "@/Redux/Hooks";
-import Createclients from "./Createclients";
 import Editclients from "./Editclients";
 import Deleteclients from "./Deleteclients";
 
@@ -92,10 +91,10 @@ const CclientsListContainer = () => {
           <Card>
             <CardBody>
                           <div className="list-product-header">
-                <Createclients />
+
                 <Editclients />
                 <Deleteclients />
-                <CclientsListFilterHeader />
+                {/* <CclientsListFilterHeader /> */}
 
                 <Collapse isOpen={clientsFilter}>
                   <Card className="shadow-none">
