@@ -76,6 +76,8 @@ export const RegisterForm: React.FC<SignupProp> = ({ logoClass }) => {
       consultationVIP: "",
       username: "",
       password: "",
+      jour: "",
+      hour: "",
     },
     onSubmit: async (values) => {
       generateCredentials();
@@ -83,7 +85,7 @@ export const RegisterForm: React.FC<SignupProp> = ({ logoClass }) => {
       await login(JSON.stringify(formik.values, null, 2));
     },
     onReset(values, formikHelpers) {
-      formik.values = ({
+      formik.values = {
         Nom: "",
         DateNaissance: new Date(),
         email: "",
@@ -100,7 +102,9 @@ export const RegisterForm: React.FC<SignupProp> = ({ logoClass }) => {
         consultationVIP: "",
         username: "",
         password: "",
-      });
+        jour: "",
+        hour: "",
+      };
     },
   });
 
@@ -143,7 +147,9 @@ export const RegisterForm: React.FC<SignupProp> = ({ logoClass }) => {
       );
       const { jwt, user } = response.data;
 
-      router.push("/fr/others/authentication/registerwizard?id=" + user.id.toString());
+      router.push(
+        "/fr/others/authentication/registerwizard?id=" + user.id.toString()
+      );
       formik.resetForm();
       generateCredentials();
       setShow(false);
@@ -169,6 +175,20 @@ export const RegisterForm: React.FC<SignupProp> = ({ logoClass }) => {
     }));
     formik.values.CommentFIV = name;
     console.log(selectedOptions);
+  };
+
+  const handleRadioChange = (event: any) => {
+    // Mise à jour de l'état avec la nouvelle sélection
+    const { name, checked } = event.target;
+
+    formik.values.jour = name;
+  };
+
+  const handleRadioHourChange = (event: any) => {
+    // Mise à jour de l'état avec la nouvelle sélection
+    const { name, checked } = event.target;
+
+    formik.values.hour = name;
   };
 
   // Pour gérer la saisie de texte dans "Autres"
@@ -247,19 +267,6 @@ export const RegisterForm: React.FC<SignupProp> = ({ logoClass }) => {
                     </Input>
                   </FormGroup>
                 </FormGroup>
-                {/* <FormGroup>
-                <Label className="col-form-label">
-                  5.Avez-vous une adresse mail ?
-                </Label>
-                <Row className="form-check">
-                  <Input
-                    id="flexRadioDefault1"
-                    type="checkbox"
-                    name="IsEmail"
-                    required
-                  />
-                </Row>
-              </FormGroup> */}
                 <FormGroup>
                   <Label className="col-form-label">5.Adresse mail</Label>
                   <Field
@@ -428,7 +435,7 @@ export const RegisterForm: React.FC<SignupProp> = ({ logoClass }) => {
                 </FormGroup>
                 <FormGroup>
                   <Label className="col-form-label">
-                    14.Souhaitez-vous une consultation VIP ?
+                    14.Souhaitez-vous une consultation VIP (30.000 FCFA) ? *
                   </Label>
                   <div className="mb-3 d-flex gap-3 checkbox-checked">
                     <div className="form-check">
@@ -464,11 +471,123 @@ export const RegisterForm: React.FC<SignupProp> = ({ logoClass }) => {
                   </div>
                 </FormGroup>
 
+                {formik.values.consultationVIP === "Oui" && (
+                  <>
+                    <FormGroup>
+                      <Label className="col-form-label">
+                        15.Quel jour souhaiteriez-vous être reçu(e) ?*
+                      </Label>
+
+                      {[
+                        { id: "option1", label: "Lundi" },
+                        {
+                          id: "option2",
+                          label: "Mardi",
+                        },
+                        { id: "option3", label: "Mercredi" },
+                        { id: "option4", label: "Jeudi" },
+                        { id: "option5", label: "Vendredi" },
+                        { id: "option6", label: "Samedi (08H00 - 12H00)" },
+                      ].map((option) => (
+                        <Row key={option.id} className="form-check">
+                          <Input
+                            id={option.id}
+                            type="radio"
+                            name={option.label}
+                            onChange={handleRadioChange}
+                          />
+                          <Label className="mb-0" htmlFor={option.id} check>
+                            {option.label}
+                          </Label>
+                        </Row>
+                      ))}
+                    </FormGroup>
+
+                    <FormGroup>
+                      <Label className="col-form-label">
+                        16.Quelle plage horaire vous convient ? *
+                      </Label>
+
+                      {[
+                        { id: "option1", label: "08H00 - 12H00" },
+                        {
+                          id: "option2",
+                          label: "14H00 - 17H00",
+                        },
+                      ].map((option) => (
+                        <Row key={option.id} className="form-check">
+                          <Input
+                            id={option.id}
+                            type="radio"
+                            name={option.label}
+                            onChange={handleRadioHourChange}
+                          />
+                          <Label className="mb-0" htmlFor={option.id} check>
+                            {option.label}
+                          </Label>
+                        </Row>
+                      ))}
+                    </FormGroup>
+                  </>
+                )}
+
+                {formik.values.consultationVIP === "Non" && (
+                  <>
+                    <FormGroup>
+                      <Label className="col-form-label">
+                        15.Quel jour souhaiteriez-vous être reçu(e) ? *
+                      </Label>
+
+                      {[
+                        {
+                          id: "option1",
+                          label:
+                            "Dr LADIPKO Titilola (Mercredi / 15H30 - 17H30)",
+                        },
+                        {
+                          id: "option2",
+                          label: "Dr N'GALULA Dorcas (Mardi / 09H00 - 12H00)",
+                        },
+                        {
+                          id: "option3",
+                          label: "Dr KOUASSI Chantal (Jeudi / 14H30 - 17H30)",
+                        },
+                        {
+                          id: "option4",
+                          label: "Dr OUSSOU Clément (Vendredi / 08H00 - 12H00)",
+                        },
+                        {
+                          id: "option5",
+                          label: "Dr WOROU Ambroise (Vendredi / 15H30 - 17H30)",
+                        },
+                      ].map((option) => (
+                        <Row key={option.id} className="form-check">
+                          <Input
+                            id={option.id}
+                            type="radio"
+                            name={option.label}
+                            onChange={handleRadioChange}
+                          />
+                          <Label className="mb-0" htmlFor={option.id} check>
+                            {option.label}
+                          </Label>
+                        </Row>
+                      ))}
+                    </FormGroup>
+
+                  </>
+                )}
+                
                 <FormGroup className="mb-0">
-                  <Button type="submit" block color="primary" className="w-100">
-                    Envoyer
-                  </Button>
-                </FormGroup>
+                      <Button
+                        type="submit"
+                        block
+                        color="primary"
+                        className="w-100"
+                      >
+                        Envoyer
+                      </Button>
+                    </FormGroup>
               </form>
             </div>
           </div>
