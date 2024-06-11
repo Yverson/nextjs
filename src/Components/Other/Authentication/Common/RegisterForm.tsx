@@ -164,13 +164,14 @@ export const RegisterForm: React.FC<SignupProp> = ({ logoClass }) => {
       };
     }
   };
-  
+
   const sendmail = async (data: any): Promise<any> => {
     try {
       const response = await axios.get(
-        `https://transitreport.covenantcloud.online/api/SendMail?id=${data.id}&email=${data.email}`);
+        `https://transitreport.covenantcloud.online/api/SendMail?id=${data.id}&email=${data.email}`
+      );
 
-        console.log(response.data);
+      console.log(response.data);
 
       return {};
     } catch (error) {
@@ -488,7 +489,7 @@ export const RegisterForm: React.FC<SignupProp> = ({ logoClass }) => {
                   </div>
                 </FormGroup>
 
-                {formik.values.consultationVIP === "Oui" && (
+                {formik.values.consultationVIP === "Non" && (
                   <>
                     <FormGroup>
                       <Label className="col-form-label">
@@ -548,7 +549,7 @@ export const RegisterForm: React.FC<SignupProp> = ({ logoClass }) => {
                   </>
                 )}
 
-                {formik.values.consultationVIP === "Non" && (
+                {formik.values.consultationVIP === "Oui" && (
                   <>
                     <FormGroup>
                       <Label className="col-form-label">
@@ -591,20 +592,14 @@ export const RegisterForm: React.FC<SignupProp> = ({ logoClass }) => {
                         </Row>
                       ))}
                     </FormGroup>
-
                   </>
                 )}
-                
+
                 <FormGroup className="mb-0">
-                      <Button
-                        type="submit"
-                        block
-                        color="primary"
-                        className="w-100"
-                      >
-                        Envoyer
-                      </Button>
-                    </FormGroup>
+                  <Button type="submit" block color="primary" className="w-100">
+                    Envoyer
+                  </Button>
+                </FormGroup>
               </form>
             </div>
           </div>
