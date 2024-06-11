@@ -147,7 +147,7 @@ export const RegisterForm: React.FC<SignupProp> = ({ logoClass }) => {
       );
       const { jwt, user } = response.data;
 
-      sendmail(user);
+      await sendmail(user);
       router.push(
         "/fr/others/authentication/registerwizard?id=" + user.id.toString()
       );
