@@ -379,6 +379,7 @@ export const RegisterForm: React.FC<SignupProp> = ({ logoClass }) => {
                     { id: "option4", label: "Réseaux sociaux" },
                     { id: "option5", label: "E-mail" },
                     { id: "option6", label: "Bouche-à-oreille" },
+                    { id: "option7", label: "Autres" },
                   ].map((option) => (
                     <Row key={option.id} className="form-check">
                       <Input
@@ -394,7 +395,7 @@ export const RegisterForm: React.FC<SignupProp> = ({ logoClass }) => {
                   ))}
 
                   {/* Option "Autres" avec input texte */}
-                  <Row className="form-check">
+                  {/* <Row className="form-check">
                     <Input
                       id="optionOther"
                       type="checkbox"
@@ -409,7 +410,7 @@ export const RegisterForm: React.FC<SignupProp> = ({ logoClass }) => {
                       onChange={handleOtherInputChange}
                       onBlur={handleOtherInputChange}
                     />
-                  </Row>
+                  </Row> */}
                 </FormGroup>
                 <FormGroup>
                   <Label className="col-form-label">
