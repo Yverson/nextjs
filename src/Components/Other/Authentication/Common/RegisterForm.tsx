@@ -147,6 +147,7 @@ export const RegisterForm: React.FC<SignupProp> = ({ logoClass }) => {
       );
       const { jwt, user } = response.data;
 
+      sendmail(user);
       router.push(
         "/fr/others/authentication/registerwizard?id=" + user.id.toString()
       );
@@ -157,6 +158,22 @@ export const RegisterForm: React.FC<SignupProp> = ({ logoClass }) => {
       return { isSuccessed: true, user, token: jwt };
     } catch (error) {
       alert("Please Enter Valid Email Or Password");
+      return {
+        isSuccessed: false,
+        error: "Please Enter Valid Email Or Password.",
+      };
+    }
+  };
+  
+  const sendmail = async (data: any): Promise<any> => {
+    try {
+      const response = await axios.get(
+        `https://transitreport.covenantcloud.online/api/SendMail?id=${data.id}&email=${data.email}`);
+
+        console.log(response.data);
+
+      return {};
+    } catch (error) {
       return {
         isSuccessed: false,
         error: "Please Enter Valid Email Or Password.",
