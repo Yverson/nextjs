@@ -225,7 +225,7 @@ export const RegisterForm: React.FC<SignupProp> = ({ logoClass }) => {
         <>
           <div>
             <div className="login-main">
-              <form className="theme-form" onSubmit={formik.handleSubmit}>
+              <form className="custom-input" onSubmit={formik.handleSubmit}>
                 <h4>Formulaire d'inscription</h4>
                 <p>FIV POUR TOUS 2024</p>
 
@@ -383,6 +383,7 @@ export const RegisterForm: React.FC<SignupProp> = ({ logoClass }) => {
                   ].map((option) => (
                     <Row key={option.id} className="form-check">
                       <Input
+                          className="form-check-input"
                         id={option.id}
                         type="checkbox"
                         name={option.label}
@@ -510,6 +511,7 @@ export const RegisterForm: React.FC<SignupProp> = ({ logoClass }) => {
                       ].map((option) => (
                         <Row key={option.id} className="form-check">
                           <Input
+                          className="form-check-input"
                             id={option.id}
                             type="radio"
                             name={option.label}
@@ -612,13 +614,6 @@ export const RegisterForm: React.FC<SignupProp> = ({ logoClass }) => {
               <h4>Formulaire d'inscription</h4>
               <p>FIV POUR TOUS 2024</p>
 
-              <Image
-                src={`${ImagePath}/login/3.jpg`}
-                alt="Example Image"
-                width={600}
-                height={700}
-              />
-
               <Button
                 type="submit"
                 block
@@ -628,6 +623,13 @@ export const RegisterForm: React.FC<SignupProp> = ({ logoClass }) => {
               >
                 Demarer
               </Button>
+              <Image
+                src={`${ImagePath}/login/3.jpg`}
+                alt="Example Image"
+                width={600}
+                height={700}
+              />
+
             </div>
           </div>
         </>
