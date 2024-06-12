@@ -466,6 +466,7 @@ export const RegisterForm: React.FC<SignupProp> = ({ logoClass }) => {
                         value="Oui"
                         checked={formik.values.consultationVIP === "Oui"}
                         onChange={formik.handleChange}
+                        required
                       />
                       <Label
                         className=" mb-0"
@@ -483,6 +484,7 @@ export const RegisterForm: React.FC<SignupProp> = ({ logoClass }) => {
                         value="Non"
                         checked={formik.values.consultationVIP === "Non"}
                         onChange={formik.handleChange}
+                        required
                       />
                       <Label className="mb-0" htmlFor="flexRadioDefault2" check>
                         Non
@@ -571,7 +573,7 @@ export const RegisterForm: React.FC<SignupProp> = ({ logoClass }) => {
                         },
                         {
                           id: "option3",
-                          label: "Dr KOUASSI Chantal (Jeudi / 14H30 - 17H30)",
+                          label: "Dr KOUASSI Chantal (Mardi / 14H30 - 18H00)",
                         },
                         {
                           id: "option4",
