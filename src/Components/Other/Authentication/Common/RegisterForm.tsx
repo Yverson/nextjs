@@ -623,7 +623,7 @@ export const RegisterForm: React.FC<SignupProp> = ({ logoClass }) => {
                 className="w-100"
                 onClick={() => setShow(true)}
               >
-                Demarer
+                Demarrer
               </Button>
               <Image
                 src={`${ImagePath}/login/3.jpg`}
