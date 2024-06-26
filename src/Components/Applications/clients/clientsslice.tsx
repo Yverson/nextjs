@@ -1,6 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 import { clientsSliceType, clientsType, SearcclientsParam } from "./clients";
+import * as XLSX from 'xlsx';
 
 const initialState: clientsSliceType = {
   clients: [],
@@ -67,6 +68,7 @@ export const fetchData = async (
         convert(data)
       );
 
+      
       clientsdata = convertedAvis;
       return { data: convertedAvis, pagination: meta };
     } else {
@@ -87,6 +89,11 @@ export const fetchData = async (
         convert(data)
       );
 
+      //const worksheet = XLSX.utils.json_to_sheet(items);
+      //const workbook = XLSX.utils.book_new();
+      //XLSX.utils.book_append_sheet(workbook, worksheet, 'Sheet1');
+      //XLSX.writeFile(workbook, 'Clients.xlsx');
+  
       return { data: convertedAvis, pagination: {} };
     }
   } catch (error) {
@@ -160,6 +167,9 @@ const clientsslice = createSlice({
   name: "clientsSlice",
   initialState,
   reducers: {
+    setClients: (state, action) => {
+      state.clients = action.payload;
+    },
     setSearcParam: (state, action) => {
       state.searcParam = action.payload;
     },
@@ -206,6 +216,7 @@ const clientsslice = createSlice({
 });
 
 export const {
+  setClients,
   setTempId,
   setEditData,
   setclientsFilter,

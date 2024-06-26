@@ -2,6 +2,7 @@ import { SearchTableButton } from "@/Constant";
 import React, { useEffect, useMemo, useState } from "react";
 import DataTable from "react-data-table-component";
 import {
+  Button,
   Card,
   CardBody,
   Col,
@@ -18,10 +19,16 @@ import { FilterclientsData, clientsListTableDataColumn } from "./columns";
 import ReactPaginate from "react-paginate";
 import "./styles.css";
 import { useDispatch } from "react-redux";
-import { fetchData, setSearcParam, setrefresh } from "./clientsslice";
+import {
+  fetchData,
+  setClients,
+  setSearcParam,
+  setrefresh,
+} from "./clientsslice";
 import { useAppSelector } from "@/Redux/Hooks";
 import Editclients from "./Editclients";
 import Deleteclients from "./Deleteclients";
+import * as XLSX from "xlsx";
 
 const CclientsListContainer = () => {
   const dispatch = useDispatch();
@@ -33,7 +40,7 @@ const CclientsListContainer = () => {
   const [{ pageIndex, pageSize }, setPagination] =
     React.useState<PaginationState>({
       pageIndex: 0,
-      pageSize: 10,
+      pageSize: 1000000,
     });
 
   const fetchDataOptions = {
@@ -56,17 +63,15 @@ const CclientsListContainer = () => {
     if (refresh) {
       setPagination({ pageIndex: 0, pageSize: 10 });
       dataQuery.refetch();
+      dispatch(setClients(dataQuery.data?.data));
       dispatch(setrefresh());
     }
   }, [refresh]);
-  
+
   useEffect(() => {
-
-      setPagination({ pageIndex: 0, pageSize: 10 });
-      dataQuery.refetch();
-
+    setPagination({ pageIndex: 0, pageSize: 10 });
+    dataQuery.refetch();
   }, [searcParam]);
-
 
   const subHeaderComponentMemo = useMemo(() => {
     return (
@@ -84,21 +89,39 @@ const CclientsListContainer = () => {
     );
   }, [filterText]);
 
+  function handleClick(event: any): void {
+    if(dataQuery.data?.data){
+      const worksheet = XLSX.utils.json_to_sheet(dataQuery.data?.data!);
+      const workbook = XLSX.utils.book_new();
+      XLSX.utils.book_append_sheet(workbook, worksheet, "Sheet1");
+      XLSX.writeFile(workbook, "Clients.xlsx");
+    }
+
+  }
+
   return (
     <Container fluid>
       <Row>
         <Col sm="12">
           <Card>
             <CardBody>
-                          <div className="list-product-header">
-
+              <div className="list-product-header">
                 <Editclients />
                 <Deleteclients />
-                {/* <CclientsListFilterHeader /> */}
+
+                <div>
+                  <Button
+                    className="badge-primary btn-mail"
+                    color="primary"
+                    onClick={handleClick}
+                  >
+                    <i className="fa fa-plus" /> Export to exel
+                  </Button>
+                </div>
 
                 <Collapse isOpen={clientsFilter}>
                   <Card className="shadow-none">
-                                      <CardBody className="list-product-body">
+                    <CardBody className="list-product-body">
                       <Row className="row-cols-xl-5 row-cols-lg-4 row-cols-md-3 row-cols-sm-2 row-cols-2 g-3">
                         {FilterclientsData.map((item, index) => (
                           <Col key={index}>
@@ -129,7 +152,7 @@ const CclientsListContainer = () => {
                   </Card>
                 </Collapse>
               </div>
-                          <div className="list-product">
+              <div className="list-product">
                 <div className="table-responsive">
                   <DataTable
                     className="theme-scrollbar"
@@ -177,4 +200,3 @@ const CclientsListContainer = () => {
 };
 
 export default CclientsListContainer;
-
