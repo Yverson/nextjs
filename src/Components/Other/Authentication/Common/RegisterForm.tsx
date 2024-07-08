@@ -616,7 +616,7 @@ export const RegisterForm: React.FC<SignupProp> = ({ logoClass }) => {
               <h4>Formulaire d'inscription</h4>
               <p>FIV POUR TOUS 2024</p>
 
-              <Button
+              {/* <Button
                 type="submit"
                 block
                 color="primary"
@@ -624,7 +624,7 @@ export const RegisterForm: React.FC<SignupProp> = ({ logoClass }) => {
                 onClick={() => setShow(true)}
               >
                 Demarrer
-              </Button>
+              </Button> */}
               <Image
                 src={`${ImagePath}/login/3.jpg`}
                 alt="Example Image"
