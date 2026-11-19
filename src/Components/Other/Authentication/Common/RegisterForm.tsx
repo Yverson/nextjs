@@ -136,7 +136,7 @@ export const RegisterForm: React.FC<SignupProp> = ({ logoClass }) => {
   const login = async (data: any): Promise<any> => {
     try {
       const response = await axios.post(
-        `https://narcisseapi.covenantcloud.online/api/auth/local/register`,
+        `https://procreav2.covenantcloud.online/api/auth/local/register`,
         data,
         {
           headers: {
@@ -254,7 +254,7 @@ export const RegisterForm: React.FC<SignupProp> = ({ logoClass }) => {
                   />
                 </FormGroup>
 
-                <FormGroup>
+                {/* <FormGroup>
                   <Label check>3.Genre *</Label>
                   <Input
                     name="Genre"
@@ -267,7 +267,7 @@ export const RegisterForm: React.FC<SignupProp> = ({ logoClass }) => {
                       <option key={index}>{item}</option>
                     ))}
                   </Input>
-                </FormGroup>
+                </FormGroup> */}
 
                 <FormGroup>
                   <FormGroup>
@@ -616,7 +616,7 @@ export const RegisterForm: React.FC<SignupProp> = ({ logoClass }) => {
               <h4>Formulaire d'inscription</h4>
               <p>FIV POUR TOUS 2024</p>
 
-              {/* <Button
+              <Button
                 type="submit"
                 block
                 color="primary"
@@ -624,7 +624,7 @@ export const RegisterForm: React.FC<SignupProp> = ({ logoClass }) => {
                 onClick={() => setShow(true)}
               >
                 Demarrer
-              </Button> */}
+              </Button>
               <Image
                 src={`${ImagePath}/login/3.jpg`}
                 alt="Example Image"
